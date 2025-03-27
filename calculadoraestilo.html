@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha 1ª Calculadora</title>
+    <style>
+        /* Estilo básico do corpo para centralizar a calculadora */
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f2f5;
+            margin: 0;
+        }
+
+        /* Container da calculadora */
+        .calculadora {
+            background-color: #222;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        /* Estilo do visor */
+        #visor {
+            width: 100%;
+            height: 60px;
+            background-color: #333;
+            color: #fff;
+            text-align: right;
+            font-size: 28px;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+
+        /* Estilo dos botões */
+        .botoes {
+            display: grid;
+            grid-template-columns: repeat(4, 60px);
+            gap: 10px;
+        }
+
+        .botoes input {
+            height: 60px;
+            background-color: #444;
+            color: #fff;
+            font-size: 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .botoes input:hover {
+            background-color: #666;
+        }
+
+        /* Botão de limpar e igual com destaque */
+        .limpar, .igual {
+            background-color: #d9534f;
+        }
+
+        .limpar:hover, .igual:hover {
+            background-color: #c9302c;
+        }
+
+        .operador {
+            background-color: #f0ad4e;
+        }
+
+        .operador:hover {
+            background-color: #ec971f;
+        }
+    </style>
+    <script>
+        // Adiciona um valor ao visor
+        function addItem(valor) {
+            const atual = document.getElementById("visor").value;
+            document.getElementById("visor").value = `${atual}${valor}`;
+        }
+
+        // Limpa o visor
+        function limpar() {
+            document.getElementById("visor").value = "";
+        }
+
+        // Realiza o cálculo da expressão no visor
+        function calcular() {
+            try {
+                const expressao = document.getElementById("visor").value;
+                const resultado = eval(expressao);  // `eval` executa expressões matemáticas
+                document.getElementById("visor").value = resultado;
+            } catch {
+                document.getElementById("visor").value = "Erro";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="calculadora">
+        <input id="visor" type="text" readonly>
+        <div class="botoes">
+            <input type="button" value="7" onclick="addItem(7)">
+            <input type="button" value="8" onclick="addItem(8)">
+            <input type="button" value="9" onclick="addItem(9)">
+            <input type="button" value="/" class="operador" onclick="addItem('/')">
+
+            <input type="button" value="4" onclick="addItem(4)">
+            <input type="button" value="5" onclick="addItem(5)">
+            <input type="button" value="6" onclick="addItem(6)">
+            <input type="button" value="x" class="operador" onclick="addItem('*')">
+
+            <input type="button" value="1" onclick="addItem(1)">
+            <input type="button" value="2" onclick="addItem(2)">
+            <input type="button" value="3" onclick="addItem(3)">
+            <input type="button" value="-" class="operador" onclick="addItem('-')">
+
+            <input type="button" value="0" onclick="addItem(0)">
+            <input type="button" value="C" class="limpar" onclick="limpar()">
+            <input type="button" value="=" class="igual" onclick="calcular()">
+            <input type="button" value="+" class="operador" onclick="addItem('+')">
+        </div>
+    </div>
+</body>
+</html>
